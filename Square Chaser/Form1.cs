@@ -18,7 +18,7 @@ namespace Square_Chaser
         Rectangle edgeRectangle = new Rectangle(70, 70, 460, 410);
         Rectangle player1 = new Rectangle(100, 280, 20, 20);
         Rectangle powerUp;
-        Rectangle killBlock;
+        Rectangle scoreBlock;
         Random randSpawn = new Random();
         
         
@@ -29,7 +29,7 @@ namespace Square_Chaser
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush orangeBrush = new SolidBrush(Color.Orange);
-        SolidBrush redBrush = new SolidBrush(Color.Red);
+        SolidBrush lightBlueBrush = new SolidBrush(Color.CadetBlue);
 
         bool wDown = false;
         bool sDown = false;
@@ -45,7 +45,7 @@ namespace Square_Chaser
             InitializeComponent();
             //spawnLocation = randSpawn.Next(0,599);
             powerUp = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 5,5);
-            killBlock = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 15, 15);
+            scoreBlock = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 15, 15);
         }
 
         private void squareChaser_KeyDown(object sender, KeyEventArgs e)
@@ -74,7 +74,7 @@ namespace Square_Chaser
             e.Graphics.FillRectangle(blackBrush, edgeRectangle);
             e.Graphics.FillRectangle(whiteBrush, player1);
             e.Graphics.FillRectangle(orangeBrush,powerUp);
-            e.Graphics.FillRectangle(redBrush, killBlock);
+            e.Graphics.FillRectangle(lightBlueBrush, scoreBlock);
         }
 
         private void squareChaser_KeyUp(object sender, KeyEventArgs e)
@@ -144,19 +144,13 @@ namespace Square_Chaser
             if (player1.IntersectsWith(powerUp))
             {
                 powerUp = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 5, 5);
-                playerScore++;
                 playerSpeed++;
-                for (killBlockAmount = 1; killBlockAmount > 50; killBlockAmount++)
-                {
-                    killBlock new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 15, 15);
-                }
-                
             }
 
-            //collision with kill block
-            if (player1.IntersectsWith(killBlock))
+            //collision with score block
+            if (player1.IntersectsWith(scoreBlock))
             {
-
+                scoreBlock = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 15, 15);
             }
 
             Refresh();
