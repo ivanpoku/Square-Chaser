@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\341695__projectsu012__coins-1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\242857__plasterbrain__coin-get.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\336932__the-sacha-rush__coin5.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\518308__mrthenoronha__world-clear-8-bit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\277020__sandermotions__applause-3.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
