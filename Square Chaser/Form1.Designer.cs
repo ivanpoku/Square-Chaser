@@ -33,6 +33,8 @@
             this.plr1ScoreLabel = new System.Windows.Forms.Label();
             this.plr2ScoreLabel = new System.Windows.Forms.Label();
             this.outputLabel = new System.Windows.Forms.Label();
+            this.wasd = new System.Windows.Forms.Label();
+            this.updownleftright = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameTimer
@@ -73,12 +75,31 @@
             this.outputLabel.TabIndex = 2;
             this.outputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // wasd
+            // 
+            this.wasd.AutoSize = true;
+            this.wasd.Location = new System.Drawing.Point(32, 224);
+            this.wasd.Name = "wasd";
+            this.wasd.Size = new System.Drawing.Size(35, 13);
+            this.wasd.TabIndex = 3;
+            this.wasd.Text = "label1";
+            // 
+            // updownleftright
+            // 
+            this.updownleftright.AutoSize = true;
+            this.updownleftright.Location = new System.Drawing.Point(275, 274);
+            this.updownleftright.Name = "updownleftright";
+            this.updownleftright.Size = new System.Drawing.Size(0, 13);
+            this.updownleftright.TabIndex = 4;
+            // 
             // squareChaser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(584, 561);
+            this.Controls.Add(this.updownleftright);
+            this.Controls.Add(this.wasd);
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.plr2ScoreLabel);
             this.Controls.Add(this.plr1ScoreLabel);
@@ -89,6 +110,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.squareChaser_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.squareChaser_KeyUp);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -98,6 +120,8 @@
         private System.Windows.Forms.Label plr1ScoreLabel;
         private System.Windows.Forms.Label plr2ScoreLabel;
         private System.Windows.Forms.Label outputLabel;
+        private System.Windows.Forms.Label wasd;
+        private System.Windows.Forms.Label updownleftright;
     }
 }
 

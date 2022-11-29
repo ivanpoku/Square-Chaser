@@ -14,9 +14,9 @@ namespace Square_Chaser
 {
     public partial class squareChaser : Form
     {
-        
-        
-        Rectangle barrier = new Rectangle(50,50,500,450);
+
+
+        Rectangle barrier = new Rectangle(50, 50, 500, 450);
         Rectangle edgeRectangle = new Rectangle(70, 70, 460, 410);
         Rectangle player1 = new Rectangle(100, 280, 20, 20);
         Rectangle player2 = new Rectangle(480, 280, 20, 20);
@@ -24,17 +24,28 @@ namespace Square_Chaser
         Rectangle scoreBlock;
         Random randSpawn = new Random();
         
-        
+
+
+
+
+
+
+
         SoundPlayer coinCollect1 = new SoundPlayer(Properties.Resources._341695__projectsu012__coins_1);
         SoundPlayer coinCollect2 = new SoundPlayer(Properties.Resources._336932__the_sacha_rush__coin5);
         SoundPlayer applause = new SoundPlayer(Properties.Resources._277020__sandermotions__applause_3);
-        
+
 
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush orangeBrush = new SolidBrush(Color.Orange);
         SolidBrush lightBlueBrush = new SolidBrush(Color.CadetBlue);
+        SolidBrush redBrush = new SolidBrush(Color.Red);
+        SolidBrush greenBrush = new SolidBrush(Color.Green);
+
+        
+
 
         bool wDown = false;
         bool sDown = false;
@@ -58,8 +69,18 @@ namespace Square_Chaser
         {
             InitializeComponent();
             //spawnLocation = randSpawn.Next(0,599);
-            powerUp = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 5,5);
+            powerUp = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 5, 5);
             scoreBlock = new Rectangle(randSpawn.Next(70, 470), randSpawn.Next(70, 470), 15, 15);
+            wasd.ForeColor = Color.Transparent;
+            wasd.BackColor = Color.Transparent;
+            wasd.Font = new Font("ArialBold", 13);
+            wasd.Width = 20;
+            wasd.Text = " ";
+            updownleftright.ForeColor = Color.Transparent;
+            updownleftright.BackColor = Color.Transparent;
+            updownleftright.Font = new Font("ArialBold", 13);
+            updownleftright.Width = 20;
+            updownleftright.Text = " ";
         }
 
         private void squareChaser_KeyDown(object sender, KeyEventArgs e)
@@ -99,16 +120,17 @@ namespace Square_Chaser
         {
             e.Graphics.FillRectangle(blueBrush, barrier);
             e.Graphics.FillRectangle(blackBrush, edgeRectangle);
-            e.Graphics.FillRectangle(whiteBrush, player1);
-            e.Graphics.FillRectangle(whiteBrush, player2);
-            e.Graphics.FillRectangle(orangeBrush,powerUp);
+            e.Graphics.FillRectangle(redBrush, player1);
+            e.Graphics.FillRectangle(greenBrush, player2);
+            e.Graphics.FillRectangle(orangeBrush, powerUp);
             e.Graphics.FillRectangle(lightBlueBrush, scoreBlock);
+
         }
 
         private void squareChaser_KeyUp(object sender, KeyEventArgs e)
         {
 
-            
+
 
             switch (e.KeyCode)
             {
@@ -144,58 +166,123 @@ namespace Square_Chaser
 
 
         {
-
-            /*if (player1.IntersectsWith(player2) && player1Speed > player2Speed)
+            //player to player collisions
+            if (player1.IntersectsWith(player2) && dDown == true && leftArrowDown == true)
             {
                 for (int i = 0; i < 10; i++)
                 {
                     player2.X -= playerRicohetX;
-                    Thread.Sleep(100);
+                    player1.X += playerRicohetX;
+                    Task.Delay(1000);
                     this.Refresh();
                 }
-                
-            }*/
+
+            }
+            else if (player1.IntersectsWith(player2) && aDown == true && rightArrowDown == true)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    player2.X += playerRicohetX;
+                    player1.X -= playerRicohetX;
+                    Task.Delay(1000);
+                    this.Refresh();
+                }
+
+            }
+            else if (player1.IntersectsWith(player2) && sDown == true && upArrowDown == true)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    player2.Y -= playerRicohetX;
+                    player1.Y += playerRicohetX;
+                    Task.Delay(1000);
+                    this.Refresh();
+                }
+            }
+            else if (player1.IntersectsWith(player2) && wDown == true && downArrowDown == true)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    player2.Y += playerRicohetX;
+                    player1.Y -= playerRicohetX;
+                    Task.Delay(1000);
+                    this.Refresh();
+                }
+            }
+
+
 
             //move player
             if (wDown == true && player1.Y > 0)
             {
                 player1.Y -= player1Speed;
+                wasd.Location = player1.Location;
+                wasd.ForeColor = Color.White;
+                wasd.Text = "W";
             }
 
             if (sDown == true && player1.Y < this.Height - player1.Height)
             {
                 player1.Y += player1Speed;
+                wasd.Location = player1.Location;
+                wasd.ForeColor = Color.White;
+                wasd.Text = "S";
             }
             
             if (aDown == true && player1.X > 0)
             {
                 player1.X -= player1Speed;
+                wasd.Location = player1.Location;
+                wasd.ForeColor = Color.White;
+                wasd.BackColor = Color.Red;
+                wasd.Text = "A";
             }
 
             if (dDown == true && player1.X < this.Height - player1.Width)
             {
                 player1.X += player1Speed;
+                wasd.Location = player1.Location;
+                wasd.ForeColor = Color.White;
+                wasd.BackColor = Color.Red;
+                wasd.Text = "D";
             }
 
             //move player 2
             if (upArrowDown == true && player2.Y > 0)
             {
                 player2.Y -= player2Speed;
+                updownleftright.Location = player2.Location;
+                updownleftright.ForeColor = Color.White;
+                updownleftright.BackColor = Color.Green;
+                updownleftright.Text = "↑";
             }
 
             if (downArrowDown == true && player2.Y < this.Height - player2.Height)
             {
                 player2.Y += player2Speed;
+                updownleftright.Location = player2.Location;
+                updownleftright.ForeColor = Color.White;
+                updownleftright.BackColor = Color.Green;
+                updownleftright.Text = "↓";
+
             }
 
             if (leftArrowDown == true && player2.X > 0)
             {
                 player2.X -= player2Speed;
+                updownleftright.Location = player2.Location;
+                updownleftright.ForeColor = Color.White;
+                updownleftright.BackColor = Color.Green;
+                updownleftright.Text = "←";
             }
 
             if (rightArrowDown == true && player2.X < this.Height - player2.Width)
             {
                 player2.X += player2Speed;
+                updownleftright.Location = player2.Location;
+                updownleftright.ForeColor = Color.White;
+                updownleftright.BackColor = Color.Green;
+                updownleftright.Text = "→";
             }
 
             //check wall collisions
@@ -288,6 +375,7 @@ namespace Square_Chaser
 
             Refresh();
         }
+
 
     }
 }
