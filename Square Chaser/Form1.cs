@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Vaniya Pokusaev
+//Square Chaser
+//November 25
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,12 +22,12 @@ namespace Square_Chaser
 
         Rectangle barrier = new Rectangle(50, 50, 500, 450);
         Rectangle edgeRectangle = new Rectangle(70, 70, 460, 410);
-        Rectangle player1 = new Rectangle(100, 280, 20, 20);
-        Rectangle player2 = new Rectangle(480, 280, 20, 20);
+        Rectangle player1 = new Rectangle(290, 280, 20, 20);
+        Rectangle player2 = new Rectangle(290, 280, 20, 20);
         Rectangle powerUp;
         Rectangle scoreBlock;
         Random randSpawn = new Random();
-        
+
 
 
 
@@ -43,8 +47,9 @@ namespace Square_Chaser
         SolidBrush lightBlueBrush = new SolidBrush(Color.CadetBlue);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush greenBrush = new SolidBrush(Color.Green);
+        SolidBrush transparentBrush = new SolidBrush(Color.Transparent);
 
-        
+
 
 
         bool wDown = false;
@@ -63,7 +68,8 @@ namespace Square_Chaser
         int player2Score = 0;
 
         int playerRicohetX = -6;
-        int playerRicohetY = 6;
+
+        int timerValue = 0;
 
         public squareChaser()
         {
@@ -174,7 +180,7 @@ namespace Square_Chaser
                     player2.X -= playerRicohetX;
                     player1.X += playerRicohetX;
                     Task.Delay(1000);
-                    this.Refresh();
+                   // this.Refresh();
                 }
 
             }
@@ -185,7 +191,7 @@ namespace Square_Chaser
                     player2.X += playerRicohetX;
                     player1.X -= playerRicohetX;
                     Task.Delay(1000);
-                    this.Refresh();
+                   // this.Refresh();
                 }
 
             }
@@ -196,7 +202,7 @@ namespace Square_Chaser
                     player2.Y -= playerRicohetX;
                     player1.Y += playerRicohetX;
                     Task.Delay(1000);
-                    this.Refresh();
+                  //  this.Refresh();
                 }
             }
             else if (player1.IntersectsWith(player2) && wDown == true && downArrowDown == true)
@@ -206,7 +212,7 @@ namespace Square_Chaser
                     player2.Y += playerRicohetX;
                     player1.Y -= playerRicohetX;
                     Task.Delay(1000);
-                    this.Refresh();
+                  //  this.Refresh();
                 }
             }
 
@@ -228,13 +234,13 @@ namespace Square_Chaser
                 wasd.ForeColor = Color.White;
                 wasd.Text = "S";
             }
-            
+
             if (aDown == true && player1.X > 0)
             {
                 player1.X -= player1Speed;
                 wasd.Location = player1.Location;
                 wasd.ForeColor = Color.White;
-                wasd.BackColor = Color.Red;
+                wasd.BackColor = Color.Transparent;
                 wasd.Text = "A";
             }
 
@@ -243,7 +249,7 @@ namespace Square_Chaser
                 player1.X += player1Speed;
                 wasd.Location = player1.Location;
                 wasd.ForeColor = Color.White;
-                wasd.BackColor = Color.Red;
+                wasd.BackColor = Color.Transparent;
                 wasd.Text = "D";
             }
 
@@ -253,7 +259,7 @@ namespace Square_Chaser
                 player2.Y -= player2Speed;
                 updownleftright.Location = player2.Location;
                 updownleftright.ForeColor = Color.White;
-                updownleftright.BackColor = Color.Green;
+                updownleftright.BackColor = Color.Transparent;
                 updownleftright.Text = "↑";
             }
 
@@ -262,7 +268,7 @@ namespace Square_Chaser
                 player2.Y += player2Speed;
                 updownleftright.Location = player2.Location;
                 updownleftright.ForeColor = Color.White;
-                updownleftright.BackColor = Color.Green;
+                updownleftright.BackColor = Color.Transparent;
                 updownleftright.Text = "↓";
 
             }
@@ -272,7 +278,7 @@ namespace Square_Chaser
                 player2.X -= player2Speed;
                 updownleftright.Location = player2.Location;
                 updownleftright.ForeColor = Color.White;
-                updownleftright.BackColor = Color.Green;
+                updownleftright.BackColor = Color.Transparent;
                 updownleftright.Text = "←";
             }
 
@@ -281,7 +287,7 @@ namespace Square_Chaser
                 player2.X += player2Speed;
                 updownleftright.Location = player2.Location;
                 updownleftright.ForeColor = Color.White;
-                updownleftright.BackColor = Color.Green;
+                updownleftright.BackColor = Color.Transparent;
                 updownleftright.Text = "→";
             }
 
@@ -342,6 +348,7 @@ namespace Square_Chaser
                 player1Score++;
                 plr1ScoreLabel.Text = $"Player 1 Score: {player1Score}";
                 coinCollect2.Play();
+                player1Speed = 4;
 
                 if (player1Score == 5)
                 {
@@ -359,6 +366,7 @@ namespace Square_Chaser
                 player2Score++;
                 plr2ScoreLabel.Text = $"Player 2 Score: {player2Score}";
                 coinCollect2.Play();
+                player2Speed = 4;
 
                 if (player2Score == 5)
                 {
@@ -369,13 +377,9 @@ namespace Square_Chaser
                 }
             }
 
-            
-
-            
-
+           
             Refresh();
         }
-
-
     }
 }
+
